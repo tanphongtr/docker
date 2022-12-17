@@ -1,5 +1,5 @@
 docker-compose.yml
-```
+```yml
 web:
   image: 'gitlab/gitlab-ce:latest'
   restart: always
