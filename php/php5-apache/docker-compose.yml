@@ -1,0 +1,39 @@
+version: '3'
+
+services:
+  app:
+    container_name: cps-activation-backend
+    build: .
+    ports:
+      - 8075:80
+    # volumes:
+    #   - ./:/var/www/html
+    depends_on:
+      - mysql
+
+  mysql:
+    container_name: cps-activation-mysql
+    image: mysql:5.7
+    # ports:
+    #   - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+    
+    volumes:
+      - /containers/cps-activation/mysql:/var/lib/mysql
+      - /containers/cps-activation/mysql:/:/var/www/scripts
+
+  phpmyadmin:
+    container_name: cps-activation-phpmyadmin
+    image: phpmyadmin/phpmyadmin:5.1.0
+    environment:
+      PMA_HOST: mysql
+      # PMA_PORT: ${MARIADB_PORT}
+      # PMA_ARBITRARY: 1
+      UPLOAD_LIMIT: 300M
+      # MYSQL_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
+    restart: always
+    ports:
+      - 8076:80
+    depends_on:
+      - mysql
