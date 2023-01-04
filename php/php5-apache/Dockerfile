@@ -8,12 +8,11 @@ RUN echo $TZ > /etc/timezone \
 
 RUN mkdir -p /etc/apache2/ssl
 
-COPY ./docker/php-config.ini /usr/local/etc/php/
+COPY ./php-config.ini /usr/local/etc/php/
 # COPY . /var/www/html/
 
 # copy source code
-COPY ./cps-activation-dashboard /var/www/html/dashboard
-COPY ./cps-activation-backend /var/www/html/r8
+COPY . /var/www/html/
 
 
 RUN apt-get -y update \
@@ -29,8 +28,7 @@ RUN a2enmod rewrite ssl headers
 
 # phân quyền cho thư mục cache
 RUN chown -R www-data:www-data /var/www \
-    && chmod -R 777 dashboard/application/cache/ \
-    && chmod -R 777 r8/application/cache/
+    && chmod -R 777 application/cache/
 
 
 # Create Volume
