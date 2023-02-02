@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-
+  # https://hub.docker.com/_/mongo
   mongo:
     image: mongo
     container_name: demo-mongo
@@ -14,6 +14,7 @@ services:
     ports:
       - 51017:27017
 
+  # https://hub.docker.com/_/mongo-express
   mongo-express:
     image: mongo-express
     container_name: demo-mongo-express
