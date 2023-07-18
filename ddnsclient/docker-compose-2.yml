@@ -1,0 +1,10 @@
+version: '2'
+services:
+  cloudflare-ddns:
+    image: oznu/cloudflare-ddns:latest
+    restart: always
+    environment:
+      - API_KEY=v4Rwg24inM-bUaT2vE8VNZ0gk0GhyxbhMlUCWhM8
+      - ZONE=phongtran.dev
+      - SUBDOMAIN=dns
+      - PROXIED=true

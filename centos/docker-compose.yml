@@ -1,0 +1,9 @@
+version: "3"
+services:
+  centos:
+    container_name: centOS
+    image: centos:7
+    tty: true
+    ports:
+      - 80:80
+
