@@ -1,0 +1,66 @@
+version: '3'
+
+services:
+  zabbix_server:
+    image: zabbix/zabbix-server-mysql:alpine-6.0-latest
+    container_name: zabbix_server
+    restart: always
+    # ports:
+    #   - "10051:10051"
+    environment:
+      - DB_SERVER_HOST=mysql
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=root
+      - MYSQL_DATABASE=zabbix
+    depends_on:
+      - mysql
+    # networks:
+    #   - zabbix-net
+
+  zabbix_web:
+    image: zabbix/zabbix-web-nginx-mysql:alpine-6.0-latest
+    container_name: zabbix_web
+    restart: always
+    ports:
+      - "8086:8080"
+    environment:
+      - DB_SERVER_HOST=mysql
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=root
+      - MYSQL_DATABASE=zabbix
+      - ZBX_SERVER_HOST=zabbix_server
+    depends_on:
+      - mysql
+    # networks:
+    #   - zabbix-net
+
+  mysql:
+    image: mysql:8.0
+    platform: linux/x86_64
+    container_name: zabbix_mysql-server
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: zabbix
+      MYSQL_PASSWORD: zabbix
+      MYSQL_DATABASE: zabbix
+
+    command: --character-set-server=utf8 --collation-server=utf8_bin
+
+    # networks:
+    #   - zabbix-net
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    platform: linux/x86_64
+    container_name: zabbix_phpmyadmin
+    restart: always
+    ports:
+      - "8087:80"
+    environment:
+      PMA_HOST: mysql
+      MYSQL_ROOT_PASSWORD: root
+    depends_on:
+      - mysql
+    # networks:
+    #   - zabbix-net
