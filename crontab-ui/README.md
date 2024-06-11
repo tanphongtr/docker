@@ -8,5 +8,6 @@ docker run -d -p 8000:8000 -v /etc/cron.d:/etc/crontabs alseambusher/crontab-ui
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 ```
 ```
-nvm use 10
+nvm install 16
+nvm use 16
 ```
