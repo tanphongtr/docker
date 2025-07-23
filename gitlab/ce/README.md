@@ -29,3 +29,18 @@ Chờ Gitlab CE khởi động lên
 
 ![image](https://user-images.githubusercontent.com/11567406/208229803-23f576d9-38fe-4986-a0b0-d014d34d59bb.png)
 
+
+vi /var/opt/gitlab/config/gitlab.rb
+gitlab-ctl reconfigure
+gitlab-ctl restart
+```
+...
+gitlab-rails console
+...
+> Notify.test_email('tanphongtr@gmail.com', 'Message Subject', 'Message Body').deliver_now
+...
+```
+
+
+
+https://docs.gitlab.com/omnibus/settings/smtp/#google-smtp-relay

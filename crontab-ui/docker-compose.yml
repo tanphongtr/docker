@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  crontab-ui:
+    image: alseambusher/crontab-ui:latest
+    container_name: crontab-ui
+    ports:
+      - 8000
+    environment:
+      BASIC_AUTH_USER=user
+      BASIC_AUTH_PWD=SecretPassword
+    volumes:
+      - /etc/cron.d:/etc/crontabs

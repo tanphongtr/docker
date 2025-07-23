@@ -1,9 +1,9 @@
-version: '3.7'
-
 services:
   web:
     image: 'gitlab/gitlab-ce:latest'
     restart: always
+    platform: linux/amd64
+    container_name: gitlab
     hostname: 'gitlab-example.com'
     environment:
       GITLAB_OMNIBUS_CONFIG: |
