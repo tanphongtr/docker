@@ -1,0 +1,19 @@
+
+services:
+  redis:
+    image: redis:7
+    container_name: sse_redis
+    restart: always
+    ports:
+      - "6322:6379"
+
+  sse-service:
+    build: .
+    container_name: sse_app
+    restart: always
+    depends_on:
+      - redis
+    ports:
+      - "8055:8000"
+    environment:
+      - REDIS_URL=redis://redis:6379
